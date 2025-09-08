@@ -1,0 +1,164 @@
+/* Custom styles for video trimmer */
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#video-preview {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+#crop-overlay {
+    pointer-events: none;
+}
+
+#crop-overlay.active {
+    pointer-events: auto;
+}
+
+#crop-box {
+    min-width: 50px;
+    min-height: 50px;
+    cursor: move;
+}
+
+#crop-box .resize-handle {
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    background: #fbbf24;
+    border: 1px solid #f59e0b;
+}
+
+.resize-handle.nw { top: -4px; left: -4px; cursor: nw-resize; }
+.resize-handle.ne { top: -4px; right: -4px; cursor: ne-resize; }
+.resize-handle.sw { bottom: -4px; left: -4px; cursor: sw-resize; }
+.resize-handle.se { bottom: -4px; right: -4px; cursor: se-resize; }
+
+/* Trim slider styling */
+#trim-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    border-radius: 4px;
+    background: #e5e7eb;
+    outline: none;
+}
+
+#trim-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #3b82f6;
+    cursor: pointer;
+}
+
+#trim-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #3b82f6;
+    cursor: pointer;
+    border: none;
+}
+
+/* Loading animation */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Progress bar animation */
+#progress-bar {
+    transition: width 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .grid.lg\\:grid-cols-3 {
+        grid-template-columns: 1fr;
+    }
+    
+    #upload-area {
+        padding: 1.5rem;
+    }
+    
+    .max-w-6xl {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* Drag and drop styling */
+.drag-over {
+    border-color: #3b82f6 !important;
+    background-color: #eff6ff;
+}
+
+/* Error and success states */
+.error {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+}
+
+.success {
+    border-color: #10b981;
+    background-color: #f0fdf4;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Focus states for accessibility */
+input:focus, select:focus, button:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Button hover effects */
+button {
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* File input styling */
+#video-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

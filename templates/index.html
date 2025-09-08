@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Video Trimmer and Cropper Online - Trim & Crop Videos Instantly</title>
+    <meta name="description" content="Trim and crop your video files instantly online. Free, fast, and secure video editor with aspect ratio options. No registration required.">
+    <meta name="keywords" content="video trimmer, video cropper, online video editor, trim video, crop video, video tools">
+    <link rel="canonical" href="https://yourdomain.com/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Free Video Trimmer and Cropper Online">
+    <meta property="og:description" content="Trim and crop your video files instantly online. Free, fast, and secure.">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Free Video Trimmer and Cropper Online">
+    <meta property="twitter:description" content="Trim and crop your video files instantly online. Free, fast, and secure.">
+    
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b">
+        <div class="max-w-6xl mx-auto px-4 py-4">
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800">
+                🎬 Video Trimmer & Cropper
+            </h1>
+            <p class="text-gray-600 mt-1">Trim and crop your videos online - Free, Fast & Secure</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        <!-- Upload Section -->
+        <div id="upload-section" class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <div id="upload-area" class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-400 transition-colors cursor-pointer">
+                <div class="max-w-md mx-auto">
+                    <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h3 class="text-lg font-medium text-gray-700 mb-2">Upload Your Video</h3>
+                    <p class="text-gray-500 mb-4">Drag and drop your video here or click to browse</p>
+                    <p class="text-sm text-gray-400">Supports: MP4, MOV, AVI, MKV, WEBM (Max 500MB)</p>
+                    <input type="file" id="video-input" accept="video/*" class="hidden">
+                    <button id="browse-btn" class="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        Browse Files
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Editor Section -->
+        <div id="editor-section" class="hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Video Preview -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold mb-4">Video Preview</h3>
+                        <div id="video-container" class="relative bg-black rounded-lg overflow-hidden">
+                            <video id="video-preview" class="w-full h-auto" controls>
+                                Your browser does not support the video tag.
+                            </video>
+                            <div id="crop-overlay" class="absolute inset-0 hidden">
+                                <div id="crop-box" class="absolute border-2 border-yellow-400 bg-yellow-400 bg-opacity-20">
+                                    <div class="absolute -top-1 -left-1 w-2 h-2 bg-yellow-400 cursor-nw-resize"></div>
+                                    <div class="absolute -top-1 -right-1 w-2 h-2 bg-yellow-400 cursor-ne-resize"></div>
+                                    <div class="absolute -bottom-1 -left-1 w-2 h-2 bg-yellow-400 cursor-sw-resize"></div>
+                                    <div class="absolute -bottom-1 -right-1 w-2 h-2 bg-yellow-400 cursor-se-resize"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <div class="space-y-6">
+                    <!-- Trim Controls -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold mb-4">✂️ Trim Video</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Start Time</label>
+                                <input type="text" id="start-time" placeholder="00:00:00" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">End Time</label>
+                                <input type="text" id="end-time" placeholder="00:00:10" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Trim Range</label>
+                                <input type="range" id="trim-slider" min="0" max="100" value="0" class="w-full">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Crop Controls -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold mb-4">🔲 Crop Video</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="flex items-center">
+                                    <input type="checkbox" id="enable-crop" class="mr-2">
+                                    <span class="text-sm font-medium text-gray-700">Enable Cropping</span>
+                                </label>
+                            </div>
+                            <div id="crop-controls" class="hidden space-y-3">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Aspect Ratio</label>
+                                    <select id="aspect-ratio" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        <option value="free">Free Crop</option>
+                                        <option value="1:1">Square (1:1)</option>
+                                        <option value="16:9">Widescreen (16:9)</option>
+                                        <option value="9:16">Vertical (9:16)</option>
+                                        <option value="4:3">Standard (4:3)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quality Settings -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold mb-4">⚙️ Quality</h3>
+                        <select id="quality-select" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="480p">480p (Fast)</option>
+                            <option value="720p" selected>720p (Balanced)</option>
+                            <option value="1080p">1080p (High Quality)</option>
+                        </select>
+                    </div>
+
+                    <!-- Process Button -->
+                    <button id="process-btn" class="w-full bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed">
+                        🚀 Process Video
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Section -->
+        <div id="progress-section" class="hidden bg-white rounded-lg shadow-md p-6 mb-8">
+            <h3 class="text-lg font-semibold mb-4">Processing Your Video...</h3>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div id="progress-bar" class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+            <p id="progress-text" class="text-sm text-gray-600 mt-2">Initializing...</p>
+        </div>
+
+        <!-- Download Section -->
+        <div id="download-section" class="hidden bg-white rounded-lg shadow-md p-6 mb-8 text-center">
+            <div class="max-w-md mx-auto">
+                <div class="text-green-600 mb-4">
+                    <svg class="mx-auto h-16 w-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">Video Ready!</h3>
+                <p class="text-gray-600 mb-6">Your video has been processed successfully.</p>
+                <div class="space-y-3">
+                    <a id="download-link" href="#" class="inline-block w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                        📥 Download Video
+                    </a>
+                    <button id="convert-another-btn" class="w-full bg-gray-200 text-gray-800 py-3 px-6 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
+                        🔄 Convert Another Video
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Privacy Notice -->
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8">
+            <div class="flex items-start">
+                <svg class="h-5 w-5 text-blue-600 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+                <div>
+                    <h4 class="text-sm font-semibold text-blue-800">🔒 Privacy & Security</h4>
+                    <p class="text-sm text-blue-700 mt-1">All files are processed securely on our servers and automatically deleted after conversion. Your videos are never stored permanently or shared with third parties.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FAQ Section -->
+    <section class="bg-white py-12">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-2xl font-bold text-center mb-8">Frequently Asked Questions</h2>
+            <div class="space-y-6">
+                <div class="border-b pb-4">
+                    <h3 class="font-semibold text-gray-800 mb-2">What video formats are supported?</h3>
+                    <p class="text-gray-600">We support MP4, MOV, AVI, MKV, and WEBM video formats up to 500MB in size.</p>
+                </div>
+                <div class="border-b pb-4">
+                    <h3 class="font-semibold text-gray-800 mb-2">Is my video data secure?</h3>
+                    <p class="text-gray-600">Yes! All videos are processed securely and automatically deleted from our servers after conversion. We never store or share your files.</p>
+                </div>
+                <div class="border-b pb-4">
+                    <h3 class="font-semibold text-gray-800 mb-2">How long does processing take?</h3>
+                    <p class="text-gray-600">Processing time depends on your video length and quality settings. Most videos are processed within 1-3 minutes.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-2">Can I crop and trim at the same time?</h3>
+                    <p class="text-gray-600">Absolutely! You can combine trimming and cropping operations in a single process to get exactly the video you need.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p>&copy; 2025 Video Trimmer & Cropper. Free online video editing tool.</p>
+            <p class="text-gray-400 text-sm mt-2">Fast, secure, and easy to use.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
